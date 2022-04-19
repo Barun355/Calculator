@@ -6,7 +6,7 @@
   <!-- Bootstrap CSS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
    
-    <title>calculator</title>
+    <title>Hello, world!</title>
    
    <style>
        .container1{
@@ -20,8 +20,25 @@
        function expres(val){
            document.getElementById('output').value+=val;
        }
+       
+       function active(val){
+           value = document.getElementById('output').value;
+           if(val == 'n'){
+               document.getElementById('n-value').value = value;
+           }
+           else if(val == 'r'){
+              document.getElementById('r-value').value = value;
+           }
+           document.getElementById('output').value = '';
+       }
+       
        function clearAll(){
            document.getElementById('output').value = '';
+       }
+       
+       function nRClear(){
+           document.getElementById('n-value').value = '';
+           document.getElementById('r-value').value = '';
        }
        
        function del(){
@@ -29,10 +46,25 @@
            document.getElementById('output').value = sl.slice(0,-1);
        }
        
+       
+       function fact(val){
+           var f= 1;
+           for(let i = 1; i<val+1; i++){
+               f*= i;
+           }
+           return f;
+       }
+      
+       
        function solve(){
-           let valu = document.getElementById('output').value;
-           let ev = eval(valu);
-           document.getElementById('output').value = ev;
+           
+           let n = parseInt( document.getElementById('n-value').value);
+           
+           let r = parseInt( document.getElementById('r-value').value);
+           
+           let comb = fact(n)/(fact(r)*fact(n-r));
+          
+           document.getElementById('output').value = comb;
        }
        
     
@@ -46,12 +78,17 @@
            <input class=" container1" id="output" value=""></input>
        </div>
        
+       <div class="row">
+           <button class= 'col' id="n" onclick=active('n')>N</button>
+           <input class='col' id="n-value" value=""></input>
+           <button class='col' id="r" onclick=active('r')>R</button>
+           <input class='col' id="r-value" value=""></input>
+           
+       </div>
        
        <div class="row">
            <button class="col btn btn-primary" type="submit" onclick="clearAll()">AC</button>
-           <button class="col btn btn-primary" type="submit" onclick="expres('%')">%</button>
            <button class="col btn btn-primary" type="submit" onclick="del()">del</button>
-           <button class="col btn btn-primary" type="submit" onclick="expres('/')">/</button>
         </div>
         
         
@@ -59,7 +96,6 @@
            <button class="col btn btn-primary" type="submit" onclick="expres('7')">7</button>
            <button class="col btn btn-primary" type="submit" onclick="expres('8')">8</button>
            <button class="col btn btn-primary" type="submit" onclick="expres('9')">9</button>
-           <button class="col btn btn-primary" type="submit" onclick="expres('*')">*</button>
         </div>
         
         
@@ -67,7 +103,6 @@
            <button class="col btn btn-primary" type="submit" onclick="expres('4')">4</button>
            <button class="col btn btn-primary" type="submit" onclick="expres('5')">5</button>
            <button class="col btn btn-primary" type="submit" onclick="expres('6')">6</button>
-           <button class="col btn btn-primary" type="submit" onclick="expres('-')">-</button>
         </div>
         
         
@@ -75,7 +110,6 @@
            <button class="col btn btn-primary" type="submit" onclick="expres('1')">1</button>
            <button class="col btn btn-primary" type="submit" onclick="expres('2')">2</button>
            <button class="col btn btn-primary" type="submit" onclick="expres('3')">3</button>
-           <button class="col btn btn-primary" type="submit" onclick="expres('+')">+</button>
         </div>
         
         
@@ -86,9 +120,15 @@
            <button class="col btn btn-primary" type="submit" onclick="solve()">=</button>
         </div>
         
-    </div>
-    <div class = "container">
-       <a href="combination.html"><button class="col btn btn-primary" type="submit">COMBINATION</button></a>
+        
+        <div class="row">
+           <button class="col btn btn-primary" id='n-r-clear' type="submit" onclick="nRClear('00')">Clear N & R</button>
+           
+        </div>
+        
+   </div>
+   <div class = "container">
+       <a href="index.html"><button class="btn btn-primary" type="submit">BACK</button></a>
     </div>
    
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> 
